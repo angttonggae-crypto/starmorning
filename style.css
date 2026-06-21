@@ -1,0 +1,836 @@
+/* CSS Reset and Variables */
+:root {
+  --bg-gradient-start: #080a15;
+  --bg-gradient-end: #1a1b35;
+  --glow-sun: #ffd8a8;
+  --glow-star: #fff9db;
+  
+  /* UI Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-hover: rgba(255, 255, 255, 0.12);
+  
+  --accent-gold: #f59e0b;
+  --accent-blue: #3b82f6;
+  --accent-purple: #a855f7;
+  
+  /* Rank Tier Colors */
+  --tier-good-bg: rgba(34, 197, 94, 0.1);
+  --tier-good-border: rgba(34, 197, 94, 0.3);
+  --tier-good-text: #4ade80;
+  
+  --tier-normal-bg: rgba(59, 130, 246, 0.1);
+  --tier-normal-border: rgba(59, 130, 246, 0.3);
+  --tier-normal-text: #60a5fa;
+  
+  --tier-caution-bg: rgba(239, 68, 68, 0.1);
+  --tier-caution-border: rgba(239, 68, 68, 0.3);
+  --tier-caution-text: #f87171;
+  
+  /* Card Action Colors */
+  --recommend-bg: rgba(251, 191, 36, 0.08);
+  --recommend-border: rgba(251, 191, 36, 0.2);
+  --recommend-text: #fde047;
+  
+  --avoid-bg: rgba(244, 63, 94, 0.08);
+  --avoid-border: rgba(244, 63, 94, 0.2);
+  --avoid-text: #fda4af;
+
+  /* Font Families */
+  --font-display: 'Jua', sans-serif;
+  --font-body: 'Gowun Dodum', 'Inter', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: linear-gradient(180deg, var(--bg-gradient-start) 0%, #101128 50%, var(--bg-gradient-end) 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Animations: Twinkling Stars */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.stars-small {
+  background-image: 
+    radial-gradient(1px 1px at 10% 20%, #ffffff, transparent),
+    radial-gradient(1px 1px at 30% 40%, #ffffff, transparent),
+    radial-gradient(1px 1px at 50% 15%, #ffffff, transparent),
+    radial-gradient(1.5px 1.5px at 70% 60%, #fff9db, transparent),
+    radial-gradient(1px 1px at 90% 30%, #ffffff, transparent),
+    radial-gradient(1px 1px at 25% 75%, #ffffff, transparent),
+    radial-gradient(1px 1px at 80% 80%, #ffffff, transparent),
+    radial-gradient(1px 1px at 45% 90%, #fff9db, transparent);
+  background-size: 550px 550px;
+  animation: twinkle 4s ease-in-out infinite alternate;
+}
+
+.stars-medium {
+  background-image: 
+    radial-gradient(2px 2px at 15% 15%, #ffffff, transparent),
+    radial-gradient(2px 2px at 40% 70%, #fff9db, transparent),
+    radial-gradient(1.5px 1.5px at 65% 35%, #ffffff, transparent),
+    radial-gradient(2px 2px at 85% 85%, #ffffff, transparent);
+  background-size: 700px 700px;
+  animation: twinkle 6s ease-in-out infinite alternate-reverse;
+  opacity: 0.8;
+}
+
+.stars-large {
+  background-image: 
+    radial-gradient(3px 3px at 20% 50%, #ffffff, transparent),
+    radial-gradient(3px 3px at 75% 25%, #ffd8a8, transparent),
+    radial-gradient(2.5px 2.5px at 50% 80%, #ffffff, transparent);
+  background-size: 900px 900px;
+  animation: twinkle 8s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+/* Morning Glow Effect (Rising Sun Blur) */
+.morning-glow {
+  position: fixed;
+  bottom: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw;
+  height: 60vh;
+  background: radial-gradient(circle, rgba(254, 215, 170, 0.12) 0%, rgba(245, 158, 11, 0.03) 50%, rgba(0, 0, 0, 0) 80%);
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(80px);
+  border-radius: 50%;
+}
+
+/* Main Container Layout */
+.app-container {
+  width: 100%;
+  max-width: 580px;
+  padding: 40px 20px 20px 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Header Styles */
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.logo-area {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.logo-emoji {
+  font-size: 2.2rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  font-weight: normal;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #ffe066 0%, #ffc078 50%, #ffd8a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 12px rgba(255, 224, 102, 0.15);
+}
+
+.tagline {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* Screen Switcher Mechanics */
+.screen {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.screen.active {
+  display: flex;
+  animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Card Styling (Glassmorphism) */
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 30px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  width: 100%;
+}
+
+.intro-card {
+  text-align: center;
+  position: relative;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: #ffdeeb;
+  margin-bottom: 20px;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+
+/* Search Box and Input Wrapper */
+.search-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+#zodiac-input {
+  width: 100%;
+  padding: 16px 44px 16px 20px;
+  border-radius: 16px;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  background: rgba(15, 17, 36, 0.5);
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: var(--font-body);
+}
+
+#zodiac-input:focus {
+  border-color: #ffd8a8;
+  box-shadow: 0 0 15px rgba(255, 216, 168, 0.25);
+  background: rgba(15, 17, 36, 0.8);
+}
+
+.btn-clear {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.btn-clear:hover {
+  color: var(--text-primary);
+}
+
+.btn {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 16px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffd8a8 0%, #ffb347 100%);
+  color: #1e1b4b;
+  box-shadow: 0 4px 15px rgba(255, 216, 168, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 216, 168, 0.45);
+  background: linear-gradient(135deg, #ffe3c1 0%, #ffbe5e 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Error Banner styling */
+.error-banner {
+  margin-top: 15px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fca5a5;
+  font-size: 0.9rem;
+  text-align: left;
+  animation: shake 0.4s ease;
+}
+
+.error-banner.hidden {
+  display: none;
+}
+
+/* Suggestion Box */
+.suggestions-container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(15, 17, 36, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  margin-top: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  z-index: 10;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+.suggestions-container.hidden {
+  display: none;
+}
+
+.suggestion-item {
+  padding: 12px 20px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Zodiac Grid Layout */
+.grid-section {
+  width: 100%;
+}
+
+.grid-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+  padding-left: 6px;
+  letter-spacing: 0.5px;
+  font-weight: normal;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grid-title::before {
+  content: '✨';
+}
+
+.zodiac-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Zodiac Button Styling */
+.zodiac-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--glass-border);
+  border-radius: 18px;
+  padding: 14px 8px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.zodiac-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffd8a8;
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 6px 15px rgba(255, 216, 168, 0.15);
+}
+
+.zodiac-btn:active {
+  transform: translateY(-1px);
+}
+
+.zodiac-symbol {
+  font-size: 1.6rem;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffffff 0%, #dbeafe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: transform 0.3s ease;
+}
+
+.zodiac-btn:hover .zodiac-symbol {
+  transform: scale(1.15) rotate(5deg);
+  background: linear-gradient(135deg, #ffd8a8 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.zodiac-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 4px;
+}
+
+.zodiac-date {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+/* --- Screen 2: Result Page Cards --- */
+.result-card {
+  padding: 34px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-purple), var(--accent-blue));
+}
+
+.result-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.result-zodiac-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 24px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.badge-symbol {
+  font-size: 1.8rem;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffd8a8 0%, #ffc078 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.badge-name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: normal;
+  color: var(--text-primary);
+  letter-spacing: 0.5px;
+}
+
+.badge-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+}
+
+.divider {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.1) 80%, transparent);
+  margin: 18px 0;
+}
+
+/* Ranking Display Area */
+.rank-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.rank-badge {
+  background: radial-gradient(circle, rgba(255, 216, 168, 0.05) 0%, rgba(255, 216, 168, 0) 70%);
+  border: 1.5px solid rgba(255, 216, 168, 0.2);
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 0 0 25px rgba(255, 216, 168, 0.08);
+  animation: float 4s ease-in-out infinite;
+}
+
+.rank-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rank-value-container {
+  display: flex;
+  align-items: baseline;
+  margin-top: -2px;
+}
+
+.rank-number {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+  background: linear-gradient(135deg, #ffd8a8 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.3));
+}
+
+.rank-unit {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin-left: 2px;
+  color: #ffd8a8;
+}
+
+.rank-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffd8a8;
+}
+
+/* Fortune Status Banner (Tier Notification) */
+.status-banner {
+  border-radius: 16px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.tier-good {
+  background: var(--tier-good-bg);
+  border-color: var(--tier-good-border);
+  color: var(--tier-good-text);
+}
+
+.tier-normal {
+  background: var(--tier-normal-bg);
+  border-color: var(--tier-normal-border);
+  color: var(--tier-normal-text);
+}
+
+.tier-caution {
+  background: var(--tier-caution-bg);
+  border-color: var(--tier-caution-border);
+  color: var(--tier-caution-text);
+}
+
+.status-emoji {
+  font-size: 1.2rem;
+}
+
+.fortune-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  text-align: center;
+  margin: 15px 0 25px 0;
+  word-break: keep-all;
+}
+
+/* Actions Grid (Do and Don't cards) */
+.actions-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.action-card {
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-recommend {
+  background: var(--recommend-bg);
+  border-color: var(--recommend-border);
+}
+
+.action-avoid {
+  background: var(--avoid-bg);
+  border-color: var(--avoid-border);
+}
+
+.action-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.action-card-header h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: normal;
+  letter-spacing: 0.3px;
+}
+
+.action-recommend h4 {
+  color: var(--recommend-text);
+}
+
+.action-avoid h4 {
+  color: var(--avoid-text);
+}
+
+.action-card-emoji {
+  font-size: 1.1rem;
+}
+
+.action-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.action-list li {
+  position: relative;
+  padding-left: 12px;
+  word-break: keep-all;
+}
+
+.action-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.action-recommend .action-list li::before {
+  color: var(--recommend-text);
+}
+
+.action-avoid .action-list li::before {
+  color: var(--avoid-text);
+}
+
+/* Cheering Phrase Banner */
+.cheering-card {
+  background: rgba(168, 85, 247, 0.08);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 18px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.cheering-title {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: #c084fc;
+  margin-bottom: 8px;
+  font-weight: normal;
+  letter-spacing: 0.5px;
+}
+
+.cheering-message {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-style: italic;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.result-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* Footer Section */
+.app-footer {
+  text-align: center;
+  padding: 30px 10px;
+  width: 100%;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.prd-link {
+  color: rgba(255, 216, 168, 0.5);
+  margin-top: 4px;
+}
+
+.copyright {
+  margin-top: 10px;
+  opacity: 0.6;
+}
+
+/* --- Animations --- */
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  100% { opacity: 1; }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Responsive Media Queries */
+@media (max-width: 500px) {
+  .app-container {
+    padding: 20px 14px 10px 14px;
+  }
+  
+  .brand-title {
+    font-size: 2.3rem;
+  }
+  
+  .card {
+    padding: 24px 18px;
+  }
+  
+  .zodiac-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  
+  .zodiac-btn {
+    padding: 12px 4px;
+  }
+  
+  .zodiac-name {
+    font-size: 0.8rem;
+  }
+  
+  .zodiac-date {
+    font-size: 0.6rem;
+  }
+
+  .actions-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .result-card {
+    padding: 24px 18px;
+  }
+}
+
+@media (max-width: 360px) {
+  .zodiac-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
